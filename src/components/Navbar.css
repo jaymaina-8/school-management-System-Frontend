@@ -1,0 +1,88 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2c3e50;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.brand-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.hamburger {
+    display: none;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-link {
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 8px 12px;
+    transition: background 0.3s ease;
+    border-radius: 6px;
+}
+
+.nav-link:hover {
+    background: #34495e;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: #1abc9c;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #16a085;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+    .navbar-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #34495e;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 15px 0;
+    }
+    .navbar-links.active {
+        display: flex;
+    }
+    .nav-link, .btn {
+        text-align: center;
+        width: 100%;
+    }
+}
