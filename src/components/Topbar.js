@@ -1,6 +1,6 @@
 // src/components/Topbar.js
 import React from 'react';
-import './Topbar.css';
+import './Topbar.styles';
 
 function Topbar() {
     const username = localStorage.getItem('username') || 'Admin';

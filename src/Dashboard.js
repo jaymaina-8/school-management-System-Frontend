@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './components/Dashboard.css';
+import './components/Dashboard.styles';
 
 function Dashboard() {
     const [students, setStudents] = useState([]);

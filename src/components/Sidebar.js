@@ -1,7 +1,7 @@
 // src/components/Sidebar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Sidebar.css';
+import './Sidebar.styles';
 
 function Sidebar() {
     const role = localStorage.getItem('role') || 'admin'; // TEMP: Replace with AuthContext later
