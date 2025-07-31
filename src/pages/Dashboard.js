@@ -1,17 +1,19 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { Button, Typography, Container } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-    const { user, logout } = useContext(AuthContext);
-    return (
-        <Container>
-            <Typography variant="h4" gutterBottom>Welcome, {user?.username}</Typography>
-            <Typography variant="h6">Role: {user?.role}</Typography>
-            <Button variant="contained" color="error" onClick={logout} sx={{ mt: 3 }}>
-                Logout
-            </Button>
-        </Container>
-    );
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user?.role === "ADMIN") navigate("/admin");
+        else if (user?.role === "TEACHER") navigate("/teacher");
+        else if (user?.role === "STAFF") navigate("/staff");
+        else navigate("/login");
+    }, [user, navigate]);
+
+    return null; // No UI here, just redirect
 };
+
 export default Dashboard;
