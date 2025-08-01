@@ -12,7 +12,8 @@ import StaffDashboard from "./pages/StaffDashboard";
 import Students from "./pages/Students";
 import Teachers from "./pages/Teachers";
 import Staff from "./pages/Staff";
-
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
@@ -38,7 +39,16 @@ function App() {
                 <Routes>
                     {/* Public */}
                     <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
+                    <Route
+                        path="/register"
+                        element={
+                            <ProtectedRoute allowedRoles={["ADMIN"]}>
+                                <Layout>
+                                    <Register />
+                                </Layout>
+                            </ProtectedRoute>
+                        }
+                    />
 
                     {/* Protected with Layout */}
                     <Route
@@ -61,6 +71,7 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+
                     <Route
                         path="/teacher"
                         element={
@@ -112,6 +123,10 @@ function App() {
                         }
                     />
                 </Routes>
+
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
+
             </AuthProvider>
         </Router>
     );

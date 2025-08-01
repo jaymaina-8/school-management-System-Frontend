@@ -37,6 +37,17 @@ const ForgotPassword = () => {
                     <Button type="submit" variant="primary" size="large" loading={loading} className="w-full">
                         Send Reset Link
                     </Button>
+
+                    <div className="text-center mt-4">
+                        <a
+                            href="/login"
+                            className="text-sm text-blue-200 hover:text-white transition"
+                        >
+                            Back to Login
+                        </a>
+                    </div>
+
+
                 </form>
             </div>
         </div>

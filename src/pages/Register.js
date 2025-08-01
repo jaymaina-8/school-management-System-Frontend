@@ -3,8 +3,11 @@ import { EyeIcon, EyeSlashIcon, UserIcon, EnvelopeIcon, LockClosedIcon } from "@
 import toast from "react-hot-toast";
 import api from "../api";
 import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+    const navigate = useNavigate();
+
     const [form, setForm] = useState({
         username: "",
         email: "",
@@ -32,6 +35,8 @@ const Register = () => {
             await api.post("register/", form);
             toast.success("User registered successfully!");
             setForm({ username: "", email: "", password: "", role: "STUDENT" });
+            // Optionally: navigate back to user list (if we create one)
+            // navigate("/users");
         } catch {
             toast.error("Error registering user");
         } finally {
@@ -42,7 +47,7 @@ const Register = () => {
     return (
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-500 to-teal-600">
             <div className="bg-white/10 backdrop-blur-md shadow-lg rounded-2xl p-8 w-full max-w-md border border-white/20">
-                <h2 className="text-3xl font-bold text-white mb-6 text-center">Register User</h2>
+                <h2 className="text-3xl font-bold text-white mb-6 text-center">Register New User</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Username */}
                     <div className="relative">
@@ -105,15 +110,25 @@ const Register = () => {
                         <option value="ADMIN">Admin</option>
                     </select>
 
-                    <Button
-                        type="submit"
-                        variant="success"
-                        size="large"
-                        loading={loading}
-                        className="w-full mt-4"
-                    >
-                        Register
-                    </Button>
+                    <div className="flex gap-2">
+                        <Button
+                            type="submit"
+                            variant="success"
+                            size="large"
+                            loading={loading}
+                            className="w-full mt-4"
+                        >
+                            Register
+                        </Button>
+                        <Button
+                            type="button"
+                            variant="secondary"
+                            className="w-full mt-4"
+                            onClick={() => navigate("/admin")}
+                        >
+                            Cancel
+                        </Button>
+                    </div>
                 </form>
             </div>
         </div>
