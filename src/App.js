@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"; // You need to import Navigate
 import { useContext } from "react";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
 import { Toaster } from "react-hot-toast";
@@ -11,7 +11,6 @@ import TeacherDashboard from "./pages/TeacherDashboard";
 import StaffDashboard from "./pages/StaffDashboard";
 import Students from "./pages/Students";
 import Teachers from "./pages/Teachers";
-import Staff from "./pages/Staff";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -37,8 +36,15 @@ function App() {
             <AuthProvider>
                 <Toaster position="top-right" reverseOrder={false} />
                 <Routes>
-                    {/* Public */}
+                    {/* THIS IS THE MISSING ROUTE */}
+                    <Route path="/" element={<Navigate to="/login" replace />} />
+
+                    {/* Public Routes */}
                     <Route path="/login" element={<Login />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
+
+                    {/* Protected Routes with Layout */}
                     <Route
                         path="/register"
                         element={
@@ -49,8 +55,6 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
-
-                    {/* Protected with Layout */}
                     <Route
                         path="/dashboard"
                         element={
@@ -71,7 +75,6 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
-
                     <Route
                         path="/teacher"
                         element={
@@ -83,7 +86,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="/staff"
+                        path="/Staff"
                         element={
                             <ProtectedRoute allowedRoles={["STAFF"]}>
                                 <Layout>
@@ -112,21 +115,7 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
-                    <Route
-                        path="/staff"
-                        element={
-                            <ProtectedRoute allowedRoles={["ADMIN"]}>
-                                <Layout>
-                                    <Staff />
-                                </Layout>
-                            </ProtectedRoute>
-                        }
-                    />
                 </Routes>
-
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/reset-password" element={<ResetPassword />} />
-
             </AuthProvider>
         </Router>
     );
